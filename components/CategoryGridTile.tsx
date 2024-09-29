@@ -1,5 +1,6 @@
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Category from '../models/category';
+import { Colors } from '../colors/Colors';
 
 interface GategoryGridTileProps {
   category: Category;
@@ -10,7 +11,7 @@ function GategoryGridTile(props: GategoryGridTileProps) {
   return (
     <View style={[styles.gridItem, { backgroundColor: props.category.color }]}>
       <Pressable
-        android_ripple={{ color: '#FFFFF7' }}
+        android_ripple={{ color: Colors.RippleColor }}
         style={({ pressed }) => [
           styles.button,
           pressed && Platform.OS === 'ios' ? styles.buttonPressed : null,

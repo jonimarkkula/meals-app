@@ -11,22 +11,25 @@ type CategoriesScreenProps = NativeStackScreenProps<
 >;
 
 function CategoriesScreen(props: CategoriesScreenProps) {
-  function renderCategoryItem(item: Category): JSX.Element {
+  function renderCategoryItem(itemData: { item: Category }): JSX.Element {
     function onCategorySelect() {
       props.navigation.navigate('MealsOverview', {
-        category: item,
+        category: itemData.item,
       });
     }
 
-    return <GategoryGridTile category={item} onPress={onCategorySelect} />;
+    return (
+      <GategoryGridTile category={itemData.item} onPress={onCategorySelect} />
+    );
   }
+
   return (
     <FlatList
       data={CATEGORIES}
       keyExtractor={(category) => {
         return category.id;
       }}
-      renderItem={({ item }) => renderCategoryItem(item)}
+      renderItem={renderCategoryItem}
       numColumns={2}
     ></FlatList>
   );
