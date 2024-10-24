@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Meal from '../models/meal';
 import { Colors } from '../colors/Colors';
+import MealDetails from './MealDetails';
 
 interface MealItemProps {
   meal: Meal;
@@ -32,15 +33,7 @@ function MealItem(props: MealItemProps) {
             ></Image>
             <Text style={styles.title}>{props.meal.title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detailItem}>{props.meal.duration}m</Text>
-            <Text style={styles.detailItem}>
-              {props.meal.complexity.toUpperCase()}
-            </Text>
-            <Text style={styles.detailItem}>
-              {props.meal.affordability.toUpperCase()}
-            </Text>
-          </View>
+          <MealDetails meal={props.meal}></MealDetails>
         </View>
       </Pressable>
     </View>
@@ -77,15 +70,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     margin: 8,
-  },
-  details: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    margin: 8,
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
   },
 });
