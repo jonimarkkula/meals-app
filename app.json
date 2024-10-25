@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MealsApp",
-    "slug": "MealsApp",
+    "slug": "meals-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,6 +22,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8b3ee036-36ba-4d3e-9a83-20f3aa883e8b"
+      }
+    },
+    "owner": "jkdmarkku",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8b3ee036-36ba-4d3e-9a83-20f3aa883e8b"
     }
   }
 }
