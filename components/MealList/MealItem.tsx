@@ -6,9 +6,9 @@ import {
   Text,
   View,
 } from 'react-native';
-import Meal from '../models/meal';
-import { Colors } from '../colors/Colors';
-import MealDetails from './MealDetails';
+import Meal from '../../models/meal';
+import { Colors } from '../../colors/Colors';
+import MealDetails from '../MealDetails';
 
 interface MealItemProps {
   meal: Meal;

@@ -3,14 +3,21 @@ import { CATEGORIES } from '../data/dummy-data';
 import Category from '../models/category';
 import GategoryGridTile from '../components/CategoryGridTile';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/NavigationPages';
-
-type CategoriesScreenProps = NativeStackScreenProps<
+import {
+  DrawerStackParamList,
   RootStackParamList,
-  'MealsCategories'
->;
+} from '../navigation/NavigationPages';
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import { NavigationProp } from '../components/util';
 
-function CategoriesScreen(props: CategoriesScreenProps) {
+interface CategoriesProp {
+  navigation: NavigationProp;
+  route:
+    | NativeStackScreenProps<RootStackParamList, 'MealsCategories'>['route']
+    | DrawerScreenProps<DrawerStackParamList, 'MealsCategoriesDrawer'>['route'];
+}
+
+function CategoriesScreen(props: CategoriesProp) {
   function renderCategoryItem(itemData: { item: Category }): JSX.Element {
     function onCategorySelect() {
       props.navigation.navigate('MealsOverview', {

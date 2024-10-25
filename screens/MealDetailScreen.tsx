@@ -7,7 +7,9 @@ import MealDetails from '../components/MealDetails';
 import SubTitle from '../components/MealDetail/Subtitle';
 import List from '../components/MealDetail/List';
 import IconButton from '../components/IconButton';
-import { Colors } from '../colors/Colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/Store';
+import { addFavorite, removeFavorite } from '../store/favorites';
 
 type MealDetailScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -15,10 +17,21 @@ type MealDetailScreenProps = NativeStackScreenProps<
 >;
 
 function MealDetailScreen(props: MealDetailScreenProps) {
+  const favoriteMealIds = useSelector((state: RootState) => {
+    return state.favoriteMeals.ids;
+  });
+  const dispatch = useDispatch();
+
   const meal = props.route.params.meal;
 
-  function headerButtonPressHandler() {
-    console.log('Placeholder to add meal to favourites');
+  const mealIsFavorite = favoriteMealIds.includes(meal.id);
+
+  function changeFavoriteStatusHandler() {
+    if (mealIsFavorite) {
+      dispatch(removeFavorite({ id: meal.id }));
+    } else {
+      dispatch(addFavorite({ id: meal.id }));
+    }
   }
 
   useLayoutEffect(() => {
@@ -26,14 +39,14 @@ function MealDetailScreen(props: MealDetailScreenProps) {
       headerRight: () => {
         return (
           <IconButton
-            icon="star"
-            onPress={headerButtonPressHandler}
-            color={Colors.AppBackgroundColor}
+            icon={mealIsFavorite ? 'star' : 'star-outline'}
+            onPress={changeFavoriteStatusHandler}
+            color="black"
           ></IconButton>
         );
       },
     });
-  }, [props.navigation, headerButtonPressHandler]);
+  }, [props.navigation, changeFavoriteStatusHandler]);
 
   useEffect(() => {
     props.navigation.setOptions({
